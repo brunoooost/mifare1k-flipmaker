@@ -10,7 +10,7 @@ This script encodes a given URL into a hexadecimal representation suitable for u
 - **Format Hexadecimal Output**: Arrange the encoded hexadecimal values into rows for easier readability.
 - **NDEF Encoding**: Generate a complete NDEF payload for the given URL.
 - **User-Friendly Interface**: Includes a banner and menu for selecting URL prefixes and input validation.
-
+- **Flipper Zero**: Display all the code to the Flipper Zero format.
 ---
 
 ## Usage
