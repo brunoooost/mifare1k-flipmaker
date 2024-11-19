@@ -1,3 +1,5 @@
+# Block 4: Functions for encoding and formatting
+
 def encode_url_to_hex(url: str) -> str:
     """
     Convert a URL to its UTF-8 hexadecimal representation.
@@ -42,7 +44,7 @@ def calculate_ndef(url: str, prefix: str) -> str:
         prefix (str): The hexadecimal prefix for the URL.
         
     Returns:
-        str: Formatted NDEF encoding string.
+        str: Formatted NDEF encoding string with block numbers.
     """
     url_without_prefix = url.replace("https://www.", "").replace("https://", "")
     length_without_prefix = len(url_without_prefix) + 1  # +1 for the prefix byte
@@ -57,8 +59,23 @@ def calculate_ndef(url: str, prefix: str) -> str:
 
     # Construct the final result with NDEF TLV format
     final_result = f"03 {hex_half_length} {ndef_payload} FE"
-    return format_hex_result(final_result)
+    
+    # Split the result into blocks
+    hex_array = final_result.split(' ')
+    blocks = []
+    block_size = 16  # Number of bytes per block
 
+    for i in range(0, len(hex_array), block_size):
+        block_number = len(blocks) + 4  # Start numbering from Block 4
+        block_data = hex_array[i:i + block_size]
+        # Pad the block with '00' if it's shorter than block_size
+        block_data.extend(['00'] * (block_size - len(block_data)))
+        blocks.append(f"Block {block_number}: {' '.join(block_data)}")
+    
+    return '\n'.join(blocks)
+
+
+# Block 5: User interaction and main script
 
 def display_banner():
     """
@@ -79,7 +96,7 @@ def display_menu():
     print("3. http://")
     print("4. tel:")
     print("5. mailto:")
-    print("2. http://www.")
+    print("6. http://www.")
     print("-" * 50)
 
 
