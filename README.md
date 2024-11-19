@@ -26,7 +26,7 @@ This script encodes a given URL into a hexadecimal representation suitable for u
 3. Run the script:
 
    ```bash
-   python script_name.py
+   python mifare1k-maker.py
    ```
 4. Follow the prompts:
 - Select a URL prefix.
