@@ -76,6 +76,10 @@ def display_menu():
     print("\nAvailable URL Prefixes:")
     print("1. https://")
     print("2. https://www.")
+    print("3. http://")
+    print("4. tel:")
+    print("5. mailto:")
+    print("2. http://www.")
     print("-" * 50)
 
 
@@ -88,13 +92,21 @@ def get_url_prefix_choice() -> str:
     """
     display_menu()
     while True:
-        choice = input("Select URL prefix (1 or 2): ").strip()
+        choice = input("Select URL prefix (from 1 to 6): ").strip()
         if choice == "1":
-            return "01"
-        elif choice == "2":
             return "04"
+        elif choice == "2":
+            return "02"
+        elif choice == "3":
+            return "03"
+        elif choice == "4":
+            return "05"
+        elif choice == "5":
+            return "06"
+        elif choice == "6":
+            return "01"
         else:
-            print("❌ Invalid choice. Please enter 1 or 2.")
+            print("❌ Invalid choice. Please enter from 1 to 6.")
 
 
 def get_valid_url() -> str:
@@ -131,7 +143,7 @@ def main():
         print("=" * 50)
         print(encoded_result)
         print("=" * 50)
-        print("\n✅ Encoding complete!")
+        print("\n✅ Encoding complete!\n")
     except Exception as error:
         print(f"❌ An error occurred: {error}")
 
