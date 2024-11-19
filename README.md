@@ -42,20 +42,33 @@ This script encodes a given URL into a hexadecimal representation suitable for u
 Available URL Prefixes:
 1. https://
 2. https://www.
---------------------------------------------------
-Select URL prefix (1 or 2): 1
+3. http://
+4. tel:
+5. mailto:
+6. http://www.
 
+Select URL prefix (from 1 to 6): 1
 Enter the URL (without prefix): example.com
 
 ⚙️  Encoding the URL...
-
-🎉 NDEF Block for Mifare Classic 1k:
-==================================================
-03 15 D1 01 0D 55 01 65 78 61 6D 70 6C 65 2E 63
-6F 6D FE 00 00 00 00 00 00 00 00 00 00 00 00 00
-==================================================
+Filetype: Flipper NFC device
+Version: 4
+Device type: Mifare Classic
+UID: 1E 0A 23 3F
+ATQA: 00 04
+SAK: 08
+Mifare Classic type: 1K
+Data format version: 2
+Block 0: 1E 0A 23 3F 08 08 04 00 62 63 64 65 66 67 68 69
+Block 1: 14 01 03 E1 03 E1 03 E1 03 E1 03 E1 03 E1 03 E1
+Block 2: 03 E1 03 E1 03 E1 03 E1 03 E1 03 E1 03 E1 03 E1
+Block 3: A0 A1 A2 A3 A4 A5 78 77 88 C1 89 EC A9 7F 8C 2A
+Block 4: 03 0C D1 01 08 55 02 6E 66 63 2E 63 6F 6D FE 00
+Block 5: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+...
 
 ✅ Encoding complete!
+
 ```
 ### Customization
 - Modify bytes_per_row in format_hex_result for different row lengths.
