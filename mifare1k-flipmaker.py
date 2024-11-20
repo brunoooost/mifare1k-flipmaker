@@ -1,29 +1,9 @@
-# Block 4: Functions for encoding and formatting
 
 def encode_url_to_hex(url: str) -> str:
-    """
-    Convert a URL to its UTF-8 hexadecimal representation.
-    
-    Args:
-        url (str): The URL to encode.
-        
-    Returns:
-        str: Hexadecimal representation of the URL, separated by spaces.
-    """
     return ' '.join(f"{ord(char):02X}" for char in url)
 
 
 def format_hex_result(hex_string: str, bytes_per_row: int = 16) -> str:
-    """
-    Format a hexadecimal string into rows of fixed byte length, padding as needed.
-    
-    Args:
-        hex_string (str): Hexadecimal string to format.
-        bytes_per_row (int): Number of bytes per row. Default is 16.
-        
-    Returns:
-        str: Formatted hexadecimal string.
-    """
     hex_array = hex_string.split(' ')
     formatted_rows = []
 
@@ -36,16 +16,6 @@ def format_hex_result(hex_string: str, bytes_per_row: int = 16) -> str:
 
 
 def calculate_ndef(url: str, prefix: str) -> str:
-    """
-    Create the NDEF encoding for a given URL and prefix, skipping blocks like 7, 11, 15, etc.
-    
-    Args:
-        url (str): The full URL to encode.
-        prefix (str): The hexadecimal prefix for the URL.
-        
-    Returns:
-        str: Formatted NDEF encoding string with specific blocks skipped.
-    """
     url_without_prefix = url.replace("https://www.", "").replace("https://", "")
     length_without_prefix = len(url_without_prefix) + 1  # +1 for the prefix byte
     hex_length = f"{length_without_prefix:02X}"
@@ -80,21 +50,15 @@ def calculate_ndef(url: str, prefix: str) -> str:
     return '\n'.join(blocks)
 
 
-# Block 5: User interaction and main script
+
 
 def display_banner():
-    """
-    Display the main banner with title and formatting for the script.
-    """
     print("=" * 50)
     print("🛠️  URL to Mifare Classic 1k Block Encoder  🛠️")
     print("=" * 50)
 
 
 def display_menu():
-    """
-    Display the menu for URL prefix selection.
-    """
     print("\nAvailable URL Prefixes:")
     print("1. https://")
     print("2. https://www.")
@@ -106,12 +70,6 @@ def display_menu():
 
 
 def get_url_prefix_choice() -> str:
-    """
-    Prompt the user to select a URL prefix and return the corresponding prefix byte.
-    
-    Returns:
-        str: Hexadecimal prefix for the selected URL type.
-    """
     display_menu()
     while True:
         choice = input("Select URL prefix (from 1 to 6): ").strip()
@@ -132,12 +90,6 @@ def get_url_prefix_choice() -> str:
 
 
 def get_valid_url() -> str:
-    """
-    Prompt the user to enter a URL and validate the input.
-    
-    Returns:
-        str: A valid URL string without prefix.
-    """
     while True:
         url = input("\nEnter the URL (without prefix): ").strip()
         if url:
@@ -146,9 +98,6 @@ def get_valid_url() -> str:
 
 
 def main():
-    """
-    Main function to run the URL-to-hex encoder for Mifare Classic 1k blocks.
-    """
     display_banner()
 
     try:
