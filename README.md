@@ -1,67 +1,39 @@
-# URL to Mifare Classic 1k Block Encoder
+# url2nfc-fliper
 
-This script encodes a given URL into a hexadecimal representation suitable for use with Mifare Classic 1k blocks, using NDEF (NFC Data Exchange Format) standards. It allows customization of URL prefixes and formats the result into a well-organized block structure.
+This Python project generates NFC-compatible data for URLs, formatted in a way that can be written to NFC tags using devices like **Flipper Zero**. The application processes URLs, converts them into a specific hexadecimal format, and prepares them for encoding on NFC tags.
 
----
+## Features ⭐
 
-## Features
+- **URL Processing:** The script processes a URL, identifies its protocol, and extracts relevant details.
+- **Hexadecimal Conversion:** The URL is converted into a hexadecimal string, compatible with NFC data encoding.
+- **Flipper Zero Compatibility:** The output is formatted for use with the Flipper Zero device, including padding, block numbering, and specific headers.
+- **Customizable Blocks:** The NFC data is formatted into adjusted blocks, with padding if necessary.
 
-- **Encode URLs to Hexadecimal**: Convert URLs into their UTF-8 hexadecimal representation.
-- **Format Hexadecimal Output**: Arrange the encoded hexadecimal values into rows for easier readability.
-- **NDEF Encoding**: Generate a complete NDEF payload for the given URL.
-- **User-Friendly Interface**: Includes a banner and menu for selecting URL prefixes and input validation.
-- **Flipper Zero**: Display all the code to the Flipper Zero format.
----
 
-## Usage
+## Example Output 📑
 
-### Prerequisites
-
-- Python 3.x installed on your system.
-
-### How to Run
-
-1. Clone or download the script.
-2. Open a terminal and navigate to the script's directory.
-3. Run the script:
-
-   ```bash
-   python mifare1k-flipmaker.py
-   ```
-4. Follow the prompts:
-- Select a URL prefix.
-- Enter the URL (excluding the prefix).
-5. The script will generate and display the NDEF block.
-
-### Example
-```plaintext
-=========================================================
-🛠️  URL to Mifare Classic 1k Block Encoder  🛠️
-=========================================================
-
-Available URL Prefixes:
-1. https://
-2. https://www.
-3. http://
-4. tel:
-5. mailto:
-6. http://www.
----------------------------------------------------------
-Select URL prefix (from 1 to 6): 2
-
-Enter the URL (without prefix): example.com
-
-⚙️  Encoding the URL...
-
-🎉 NDEF Block for Mifare Classic 1k:
-=========================================================
-Block 4: 03 10 D1 01 0C 55 02 65 78 61 6D 70 6C 65 2E 63
-Block 5: 6F 6D FE 00 00 00 00 00 00 00 00 00 00 00 00 00
-=========================================================
-
-✅ Encoding complete!
+After entering a URL like `https://example.com`, the output might look like this:
 
 ```
-### Customization
-- Modify bytes_per_row in format_hex_result for different row lengths.
-- Add more prefix options by extending the get_url_prefix_choice function.
+=== Generated NFC File ===
+Filetype: Flipper NFC device
+Version: 4
+# Device type: Mifare Classic
+Device type: Mifare Classic
+UID: 1E 0A 23 3F
+# ISO14443-3A specific data
+ATQA: 00 04
+SAK: 08
+Mifare Classic type: 1K
+Data format version: 2
+# Mifare Classic blocks
+Block 0: 1E 0A 23 3F 08 08 04 00 62 63 64 65 66 67 68 69
+Block 1: 14 01 03 E1 03 E1 03 E1 03 E1 03 E1 03 E1 03 E1
+...
+Block 63: D3 F7 D3 F7 D3 F7 7F 07 88 40 FF FF FF FF FF FF
+```
+
+### **Generated Blocks**:
+
+Each data block will consist of 32 hexadecimal characters, and will be numbered to make it easier to write to the NFC tag. The output also includes additional padding where necessary to complete the blocks.
+
